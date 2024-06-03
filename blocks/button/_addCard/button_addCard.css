@@ -1,0 +1,6 @@
+.button_addCard {
+  height: 50px;
+  width: 150px;
+  border: 2px solid #FFFFFF;
+  background-image: url(/images/plus.svg);
+}

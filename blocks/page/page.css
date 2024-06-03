@@ -1,4 +1,12 @@
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 900; src: url("/fonts/Inter-Black.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 900; src: url("/fonts/Inter-BlackItalic.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400; src: url("/fonts/Inter-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 400; src: url("/fonts/Inter-Italic.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 500; src: url("/fonts/Inter-Medium.woff2") format("woff2"); }
+@font-face { font-family: "Inter"; font-style: italic; font-weight: 500; src: url("/fonts/Inter-MediumItalic.woff2") format("woff2"); }
+
 .page {
+  font-family: 'Inter';
   background-color:black;
   color: white;
 }
