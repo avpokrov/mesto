@@ -1,0 +1,12 @@
+.card__info {
+  display: flex;
+  justify-content: space-between;
+  margin: auto 0;
+  color: black;
+  height: 23px;
+  width: 246px;
+}
+
+.card__info :last-child {
+  align-self: end;
+}

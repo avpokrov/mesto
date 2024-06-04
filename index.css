@@ -13,6 +13,11 @@
 @import url('/blocks/profile/__name-box/profile__name-box.css');
 @import url('/blocks/cards/cards.css');
 @import url('/blocks/card/card.css');
+@import url('/blocks/card/__img/card__img.css');
+@import url('/blocks/card/__info/card__info.css');
+@import url('/blocks/card/__name/card__name.css');
+@import url('/blocks/like/like.css');
+@import url('/blocks/like/_active/like_active.css');
 
 
 

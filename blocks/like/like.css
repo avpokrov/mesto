@@ -1,0 +1,7 @@
+.like {
+  height: 19px;
+  width: 22px;
+  background-image: url('/images/hat.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
