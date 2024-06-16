@@ -1,0 +1,10 @@
+.button_close {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    background: url('/images/x.svg');
+    border: none;
+    cursor: pointer;
+}

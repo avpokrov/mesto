@@ -2,4 +2,6 @@
   background-repeat:no-repeat;
   background-position: center;
   background-color: black;
+  padding: 0;
+  cursor: pointer;
 }
