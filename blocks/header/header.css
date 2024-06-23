@@ -3,3 +3,9 @@
   width: 100%;
   border-bottom: 1px solid rgba(84, 84, 84);
 }
+
+@media screen and (max-width: 580px) {
+  .header {
+    height: 54px;
+  }
+}

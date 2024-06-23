@@ -10,3 +10,11 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 580px) {
+  .popup__container {
+    height: 322px;
+    width: 282px;
+    padding: 22px;
+  }
+}

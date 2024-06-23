@@ -5,6 +5,18 @@
     top: -35px;
     right: -35px;
     background: url('/images/x.svg');
+    background-size: contain;
     border: none;
     cursor: pointer;
+}
+
+@media screen and (max-width: 580px) {
+    .button_close {
+        width: 20px;
+        height: 20px;
+        top: -35px;
+        right: 0px;
+
+    }
+
 }

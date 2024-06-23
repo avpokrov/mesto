@@ -1,7 +1,6 @@
 .profile__info {
   height: 73px;
-  min-width: 336px;
-  max-width: 500px;
+  max-width: 70%;
   border-color: red;
   margin-left: 30px;
   display: flex;
@@ -9,3 +8,15 @@
   align-items: left;
   justify-content: space-between;
 }
+
+@media screen and (max-width: 580px) {
+  .profile__info {
+    margin: 26px 0 36px 0;
+    height: 54px;
+    max-width: 100%;
+    align-items: space-between;
+    align-items: center;
+  }
+}
+
+

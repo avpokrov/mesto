@@ -2,11 +2,19 @@
   max-width: 880px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 @media screen and (max-width: 994px) {
 
   .main {
-    max-width: 595px;
+    max-width: 581px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+
+  .main {
+    max-width: 320px;
   }
 }
