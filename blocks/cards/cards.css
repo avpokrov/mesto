@@ -5,6 +5,13 @@
   column-gap: 17px;
   list-style-type: none;
   padding: 0;
-  justify-content: center;
+  justify-content: left;
   margin: 0;
+}
+
+@media screen and (max-width: 580px) {
+
+  .cards {
+    justify-content: center;
+  }
 }

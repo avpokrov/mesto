@@ -26,65 +26,36 @@
       <button class="button button_addCard active-element"></button>
     </section>
     <ul class="cards ident-top40px">
-      <li class="card">
-        <img class="card__img" src="/images/karachaevsk.png" alt="Карачаево">
-        <div class="card__info">
-          <h2 class="card__name">Карачаевск</h2>
-          <div class="like active-element"></div>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__img" src="/images/elbrus.png" alt="Эльбрус">
-        <div class="card__info">
-          <h2 class="card__name">Гора Эльбрус</h2>
-          <div class="like active-element active-element"></div>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__img" src="/images/dombay.png" alt="Домбай">
-        <div class="card__info">
-          <h2 class="card__name">Домбай</h2>
-          <div class="like active-element"></div>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__img" src="/images/elbrus.png" alt="Эльбрус">
-        <div class="card__info">
-          <h2 class="card__name">Гора Эльбрус</h2>
-          <div class="like active-element"></div>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__img" src="/images/dombay.png" alt="Домбай">
-        <div class="card__info">
-          <h2 class="card__name">Домбай</h2>
-          <div class="like active-element"></div>
-        </div>
-      </li>
-      <li class="card">
-        <img class="card__img" src="/images/karachaevsk.png" alt="Карачаево">
-        <div class="card__info">
-          <h2 class="card__name">Карачаевск</h2>
-          <div class="like active-element"></div>
-        </div>
-      </li>
     </ul>
     <footer class="footer">
       <p class="footer__text">&#169; 2024 Mesto Russia</p>
     </footer>
   </main>
 
-  <section class="popup">
-    <div class="popup__container">
-      <button class="button button_close active-element"></button>
-      <h2 class="popup__header">Редактировать профиль</h2>
-      <form name="edit-form" class="popup__form">
-        <input class="popup__field-text popup-name"></input>
-        <input class="popup__field-text popup-description"></input>
-        <button class="popup__button active-element">Сохранить</button>
-      </form>
-    </div>
-  </section>
+  <template id="popup">
+    <section class="popup">
+      <div class="popup__container">
+        <button class="button button_close active-element"></button>
+        <h2 class="popup__header"></h2>
+        <form name="edit-form" class="popup__form">
+          <input class="popup__field-text popup-name"></input>
+          <input class="popup__field-text popup-description"></input>
+          <button class="popup__button active-element"></button>
+        </form>
+      </div>
+    </section>
+  </template>
+  
+  <template id="card">
+    <li class="card">
+      <div class="trash active-element"></div>
+      <img class="card__img" src="" alt="">
+      <div class="card__info">
+        <h2 class="card__name"></h2>
+        <div class="like active-element"></div>
+      </div>
+    </li>
+  </template>
   <script src="/scripts/index.js"></script>
 </body>
 </html>

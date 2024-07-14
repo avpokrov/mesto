@@ -1,0 +1,12 @@
+.trash {
+    position: absolute;
+    top: 25px;
+    right: 21px;
+    height: 19px;
+    width: 18px;
+    background-image: url('/images/trash.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+}
