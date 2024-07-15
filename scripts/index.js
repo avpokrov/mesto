@@ -3,34 +3,9 @@ const profileDescription = document.querySelector('.profile__description');
 const editProfileButton = document.querySelector('.button_editProfile');
 const addCardButton = document.querySelector('.button_addCard');
 const cards = document.querySelector('.cards');
+const popupImg = document.querySelector('.popup-img');
 const temlateCard = document.querySelector('#card').content;
 const templatePopup = document.querySelector('#popup').content;
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
 
 
   const createPopup = (dataForm) => {
@@ -48,20 +23,20 @@ const initialCards = [
     return popup;
   }
 const popupEditProfile = createPopup({namePopup: 'Редактировать профиль',
-                                      textButton: 'Сохранить', 
+                                      textButton: 'Сохранить',
                                       submitFormFunction: handleSubmitEditProrileForm,
                                       namePlaceholder: '',
                                       descriptionPlaceholder: ''});
 
 const popupAddCard = createPopup({namePopup: 'Новое место',
-                                  textButton: 'Создать', 
+                                  textButton: 'Создать',
                                   submitFormFunction: handleSubmitAddCardForm,
                                   namePlaceholder: 'Название',
                                   descriptionPlaceholder: 'Введите url'});
-
+popupImg.querySelector('.button_close').addEventListener('click', () => {closePopup(popupImg)});
 renderObject(popupEditProfile, document.body);
 renderObject(popupAddCard, document.body);
-  
+
 initialCards.forEach( (item) => {
   const card = createCard(item.link, item.name);
   renderObject(card, cards);
@@ -76,6 +51,8 @@ function createCard(image, name) {
   cardName.textContent = name;
   const like = card.querySelector('.like');
   const trash = card.querySelector('.trash');
+  card.querySelector('.card__img').addEventListener('click', () => {
+    openPopup(popupImg, '', {name: name, src: image})});
   like.addEventListener('click', () => {
     like.classList.toggle('like_active');
   });
@@ -108,12 +85,17 @@ addCardButton.addEventListener('click', () => {
 })
 
 
-function openPopup (popup, inputValues = '') {
-  if(inputValues != ''){
+function openPopup (popup, inputValues = '', imgData = '') {
+  if(inputValues){
     nameField = popup.querySelector('.popup-name');
-    descriptionField = popup.querySelector('.popup-description'); 
+    descriptionField = popup.querySelector('.popup-description');
     nameField.value = inputValues.name;
     descriptionField.value = inputValues.description;
+  } else if(imgData) {
+    const image = popup.querySelector('.popup-img__image');
+    image.src = imgData.src;
+    image.alt = imgData.name;
+    popup.querySelector('.popup-img__text').textContent = imgData.name;
   }
   popup.classList.add('popup_opened');
 }
@@ -127,7 +109,7 @@ function handleSubmitEditProrileForm(evt) {
     profileName.textContent = popupEditProfile.querySelector('.popup-name').value;
     profileDescription.textContent = popupEditProfile.querySelector('.popup-description').value;
     closePopup(popupEditProfile);
-    
+
 }
 
 function handleSubmitAddCardForm(evt) {
@@ -136,5 +118,5 @@ function handleSubmitAddCardForm(evt) {
   const url = evt.srcElement.querySelector('.popup-description').value;
   const card = createCard(url, name);
   renderObject(card, cards, 'start');
-  closePopup(popupAddCard); 
+  closePopup(popupAddCard);
 }
