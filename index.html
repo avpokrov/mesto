@@ -31,19 +31,35 @@
       <p class="footer__text">&#169; 2024 Mesto Russia</p>
     </footer>
   </main>
-  <template id="popup">
-    <section class="popup">
+    <section class="popup popup-editProfile">
       <div class="popup__container">
         <button class="button button_close active-element"></button>
-        <h2 class="popup__header"></h2>
+        <h2 class="popup__header">Редактировать профиль</h2>
         <form name="edit-form" class="popup__form">
           <input class="popup__field-text popup-name"></input>
           <input class="popup__field-text popup-description"></input>
-          <button class="popup__button active-element"></button>
+          <button class="popup__button active-element">Сохранить</button>
         </form>
       </div>
     </section>
-  </template>
+    <section class="popup popup-createCard">
+      <div class="popup__container">
+        <button class="button button_close active-element"></button>
+        <h2 class="popup__header">Новое место</h2>
+        <form name="edit-form" class="popup__form">
+          <input class="popup__field-text popup-name" placeholder="Название"></input>
+          <input class="popup__field-text popup-description" placeholder="Введите url"></input>
+          <button class="popup__button active-element">Создать</button>
+        </form>
+      </div>
+    </section>
+  <section class="popup popup-img">
+    <div class="popup-img__container">
+      <button class="button button_close active-element"></button>
+      <img class="popup-img__image" src="" alt="">
+      <h3 class="popup-img__text"></h3>
+    </div>
+  </section>
   <template id="card">
     <li class="card">
       <div class="trash active-element"></div>
@@ -54,13 +70,6 @@
       </div>
     </li>
   </template>
-  <section class="popup popup-img">
-    <div class="popup-img__container">
-      <button class="button button_close active-element"></button>
-      <img class="popup-img__image" src="" alt="">
-      <h3 class="popup-img__text"></h3>
-    </div>
-  </section>
   <script src="/scripts/initialCards.js"></script>
   <script src="/scripts/index.js"></script>
 </body>

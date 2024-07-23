@@ -3,39 +3,12 @@ const profileDescription = document.querySelector('.profile__description');
 const editProfileButton = document.querySelector('.button_editProfile');
 const addCardButton = document.querySelector('.button_addCard');
 const cards = document.querySelector('.cards');
+const popupEditProfile = document.querySelector('.popup-editProfile');
+const popupAddCard = document.querySelector('.popup-createCard');
 const popupImg = document.querySelector('.popup-img');
 const temlateCard = document.querySelector('#card').content;
-const templatePopup = document.querySelector('#popup').content;
 
-
-  const createPopup = (dataForm) => {
-    const popup = templatePopup.querySelector('.popup').cloneNode(true);
-    popup.querySelector('.popup__header').textContent = dataForm.namePopup;
-    popup.querySelector('.popup__button').textContent = dataForm.textButton;
-    popup.querySelector('.popup-name').placeholder = dataForm.namePlaceholder;
-    popup.querySelector('.popup-description').placeholder = dataForm.descriptionPlaceholder;
-    popup.querySelector('.button_close').addEventListener('click', () => {
-      closePopup(popup);
-    })
-    popup.addEventListener('submit', (evt) => {
-      dataForm.submitFormFunction(evt);
-    });
-    return popup;
-  }
-const popupEditProfile = createPopup({namePopup: 'Редактировать профиль',
-                                      textButton: 'Сохранить',
-                                      submitFormFunction: handleSubmitEditProrileForm,
-                                      namePlaceholder: '',
-                                      descriptionPlaceholder: ''});
-
-const popupAddCard = createPopup({namePopup: 'Новое место',
-                                  textButton: 'Создать',
-                                  submitFormFunction: handleSubmitAddCardForm,
-                                  namePlaceholder: 'Название',
-                                  descriptionPlaceholder: 'Введите url'});
 popupImg.querySelector('.button_close').addEventListener('click', () => {closePopup(popupImg)});
-renderObject(popupEditProfile, document.body);
-renderObject(popupAddCard, document.body);
 
 initialCards.forEach( (item) => {
   const card = createCard(item.link, item.name);
@@ -59,8 +32,6 @@ function createCard(image, name) {
   trash.addEventListener('click', () => {
     card.remove();
   })
-
-
   return card;
 }
 
