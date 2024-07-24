@@ -7,8 +7,38 @@ const popupEditProfile = document.querySelector('.popup-editProfile');
 const popupAddCard = document.querySelector('.popup-createCard');
 const popupImg = document.querySelector('.popup-img');
 const temlateCard = document.querySelector('#card').content;
+const popups = Array.from(document.querySelectorAll('.popup'));
 
-popupImg.querySelector('.button_close').addEventListener('click', () => {closePopup(popupImg)});
+function initialForms() {
+  popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+      if(evt.target.classList.contains('button_close') || evt.target.classList.contains('popup')){
+        closePopup();
+      }
+    });
+    const form = popup.querySelector('.popup__form');
+    if(form) {
+      const nameForm = form.name;
+      if(nameForm === 'editProfile'){
+        form.addEventListener('submit', (evt) => {
+          handleSubmitEditProrileForm(evt);
+        })
+      } else if(nameForm === 'addCard') {
+        form.addEventListener('submit', (evt) => {
+          handleSubmitAddCardForm(evt);
+        })
+      }
+    }
+  })
+}
+
+const closePopupInputEsc = (evt) => {
+  if(evt.key === 'Escape'){
+    closePopup();
+  }
+}
+
+initialForms();
 
 initialCards.forEach( (item) => {
   const card = createCard(item.link, item.name);
@@ -69,10 +99,14 @@ function openPopup (popup, inputValues = '', imgData = '') {
     popup.querySelector('.popup-img__text').textContent = imgData.name;
   }
   popup.classList.add('popup_opened');
+  document.addEventListener('keyup', closePopupInputEsc);
 }
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened')
+function closePopup() {
+  popups.forEach((popup) => {
+    document.removeEventListener('keyup', closePopupInputEsc);
+    popup.classList.remove('popup_opened');
+  })
 }
 
 function handleSubmitEditProrileForm(evt) {
@@ -91,3 +125,12 @@ function handleSubmitAddCardForm(evt) {
   renderObject(card, cards, 'start');
   closePopup(popupAddCard);
 }
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});

@@ -35,9 +35,9 @@
       <div class="popup__container">
         <button class="button button_close active-element"></button>
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form name="edit-form" class="popup__form">
-          <input class="popup__field-text popup-name"></input>
-          <input class="popup__field-text popup-description"></input>
+        <form name="editProfile" class="popup__form">
+          <input class="popup__field-text popup-name" minlength="2" maxlength="40" required></input>
+          <input class="popup__field-text popup-description" minlength="2" maxlength="200" required></input>
           <button class="popup__button active-element">Сохранить</button>
         </form>
       </div>
@@ -46,9 +46,9 @@
       <div class="popup__container">
         <button class="button button_close active-element"></button>
         <h2 class="popup__header">Новое место</h2>
-        <form name="edit-form" class="popup__form">
-          <input class="popup__field-text popup-name" placeholder="Название"></input>
-          <input class="popup__field-text popup-description" placeholder="Введите url"></input>
+        <form name="addCard" class="popup__form">
+          <input class="popup__field-text popup-name" placeholder="Название" minlength="2" maxlength="30" required></input>
+          <input class="popup__field-text popup-description" placeholder="Введите url" type="url"></input>
           <button class="popup__button active-element">Создать</button>
         </form>
       </div>
@@ -71,6 +71,7 @@
     </li>
   </template>
   <script src="/scripts/initialCards.js"></script>
+  <script src="/scripts/validate.js"></script>
   <script src="/scripts/index.js"></script>
 </body>
 </html>
