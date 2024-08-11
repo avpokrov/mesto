@@ -1,3 +1,6 @@
+import {initialCards} from './initialCards.js';
+import {Card} from './Card.js';
+
 const nameProfile = document.querySelector('.profile__name').textContent;
 const descriptionProfile = document.querySelector('.profile__description').textContent;
 const inputValuesProfile = {
@@ -51,20 +54,15 @@ const closePopupInputEsc = (evt) => {
   }
 }
 
-initialForms();
+//initialForms();
 
 initialCards.forEach( (item) => {
-  const card = createCard(item.link, item.name);
-  renderObject(card, cards);
+  const card = new Card(item, '#card');
+  const cardElement = card.generateCard();
+  renderObject(cardElement, cards);
 });
 
 function createCard(image, name) {
-  const card = temlateCard.querySelector('.card').cloneNode(true);
-  const cardImg =  card.querySelector('.card__img');
-  const cardName = card.querySelector('.card__name');
-  cardImg.src = image;
-  cardImg.alt = name;
-  cardName.textContent = name;
   const like = card.querySelector('.like');
   const trash = card.querySelector('.trash');
   card.querySelector('.card__img').addEventListener('click', () => {
