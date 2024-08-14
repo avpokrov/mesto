@@ -1,8 +1,10 @@
 export class Card {
-    constructor(dataCard, template){
+    constructor(dataCard, template, popup, openPopup){
         this._name = dataCard.name;
         this._link = dataCard.link;
         this._template = template;
+        this._openPopup = openPopup;
+        this._popup = popup;
     }
     _getTemplate() {
         const cardElement = document.querySelector(this._template).content
@@ -29,7 +31,7 @@ export class Card {
         this._element.remove();
       })
       this._element.querySelector('.card__img').addEventListener('click', ()=> {
-        this._openPopupImage();
+        openPopup();
       })
     }
 
@@ -39,15 +41,6 @@ export class Card {
 
     _handleClickTrash(){
       this._element.remove();
-    }
-
-    _openPopupImage(){
-      const popup = document.querySelector('.popup-img');
-      const image = popup.querySelector('.popup-img__image');
-      image.src = this._link;
-      image.alt = this._name;
-      popup.querySelector('.popup-img__text').textContent = this._name;
-      popup.classList.add('popup_opened');
     }
 
  }

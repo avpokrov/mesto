@@ -57,7 +57,7 @@ const closePopupInputEsc = (evt) => {
 //initialForms();
 
 initialCards.forEach( (item) => {
-  const card = new Card(item, '#card');
+  const card = new Card(item, '#card', popupImg, openPopup);
   const cardElement = card.generateCard();
   renderObject(cardElement, cards);
 });
@@ -103,7 +103,7 @@ function openPopup (popup, inputValues = '', imgData = '') {
   const form = popup.querySelector(validateData.formSelector);
   if(inputValues){
     setInputPopup(popup, inputValues);
-  
+
   } else if(imgData) {
     const image = popup.querySelector('.popup-img__image');
     image.src = imgData.src;
