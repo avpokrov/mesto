@@ -13,7 +13,6 @@ const cards = document.querySelector('.cards');
 const popupEditProfile = document.querySelector('.popup-editProfile');
 const popupAddCard = document.querySelector('.popup-createCard');
 const popupImg = document.querySelector('.popup-img');
-const temlateCard = document.querySelector('#card').content;
 const popups = Array.from(document.querySelectorAll('.popup'));
 const validateData = {
   formSelector: '.popup__form',
@@ -23,38 +22,6 @@ const validateData = {
   inputErrorClass: 'popup__field-text-error',
   errorClass: 'popup__field-text_error'
 }
-
-function initialForms() {
-  popups.forEach((popup) => {
-    popup.addEventListener('click', (evt) => {
-      if(evt.target.classList.contains('button_close') || evt.target.classList.contains('popup')){
-        closePopup();
-      }
-    });
-    const form = popup.querySelector('.popup__form');
-    if(form) {
-      const nameForm = form.name;
-      if(nameForm === 'editProfile'){
-        setInputPopup(popup, inputValuesProfile);
-        form.addEventListener('submit', (evt) => {
-          handleSubmitEditProrileForm(evt);
-        })
-      } else if(nameForm === 'addCard') {
-        form.addEventListener('submit', (evt) => {
-          handleSubmitAddCardForm(evt);
-        })
-      }
-    }
-  })
-}
-
-const closePopupInputEsc = (evt) => {
-  if(evt.key === 'Escape'){
-    closePopup();
-  }
-}
-
-//initialForms();
 
 initialCards.forEach( (item) => {
   const card = new Card(item, '#card', popupImg, openPopup);
