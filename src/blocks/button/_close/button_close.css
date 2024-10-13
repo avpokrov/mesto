@@ -4,7 +4,7 @@
     position: absolute;
     top: -35px;
     right: -35px;
-    background: url('/images/x.svg');
+    background: url('../../../images/x.svg');
     background-size: contain;
     border: none;
     cursor: pointer;

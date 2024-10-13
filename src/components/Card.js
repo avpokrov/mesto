@@ -31,7 +31,7 @@ export class Card {
         this._element.remove();
       })
       this._element.querySelector('.card__img').addEventListener('click', ()=> {
-        openPopup();
+        // openPopup();
       })
     }
 

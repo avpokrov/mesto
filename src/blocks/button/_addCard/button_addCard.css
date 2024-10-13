@@ -2,7 +2,7 @@
   height: 50px;
   width: calc(16% + 40px);
   border: 2px solid #FFFFFF;
-  background-image: url(/images/plus.svg);
+  background-image: url(../../../images/plus.svg);
 }
 
 @media screen and (max-width: 580px) {
