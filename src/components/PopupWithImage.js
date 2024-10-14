@@ -1,4 +1,6 @@
-class PopupWithImage extends Card {
+import { Popup } from "./Popup";
+
+class PopupWithImage extends Popup {
     constructor() {
 
     }
