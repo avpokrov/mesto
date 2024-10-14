@@ -1,6 +1,7 @@
 import '../index.css';
 import { Section } from '../components/Section.js';
 import { Popup } from '../components/Popup.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
 import { initialCards } from '../utils/initialCards.js';
 import { Card } from '../components/Card.js';
 
@@ -40,6 +41,13 @@ editProfileButton.addEventListener('click', () => {
   editProfilePopup.open();
  });
 
+const popupImage = new PopupWithImage('.popup-img');
+const imageData = {
+  src: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+  name: 'Архыз'
+}
+popupImage.setEventListeners();
+popupImage.open(imageData);
 
 // editProfileButton.addEventListener('click', () => {
 //   openPopup(popupEditProfile,inputValuesProfile);
