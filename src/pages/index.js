@@ -2,6 +2,7 @@ import '../index.css';
 import { Section } from '../components/Section.js';
 import { Popup } from '../components/Popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
 import { initialCards } from '../utils/initialCards.js';
 import { Card } from '../components/Card.js';
 
@@ -15,8 +16,6 @@ const editProfileButton = document.querySelector('.button_editProfile');
 const addCardButton = document.querySelector('.button_addCard');
 const popupEditProfile = document.querySelector('.popup-editProfile');
 const popupAddCard = document.querySelector('.popup-createCard');
-const popupImg = document.querySelector('.popup-img');
-const popups = Array.from(document.querySelectorAll('.popup'));
 const validateData = {
   formSelector: '.popup__form',
   inputSelector: '.popup__field-text',
@@ -26,28 +25,27 @@ const validateData = {
   errorClass: 'popup__field-text_error'
 }
 
+const popupImage = new PopupWithImage('.popup-img');
+popupImage.setEventListeners();
+
 const cardsList = new Section ({items: initialCards,
   renderer: (item)=>{ 
-    const card = new Card(item, '#card', popupImg);
+    const card = new Card(item, '#card', popupImage.open);
     return card.generateCard();  
   }
 }, '.cards');
 cardsList.renderItems();
 
-const editProfilePopup = new Popup('.popup-editProfile');
+
+const editProfilePopup = new PopupWithForm('.popup-editProfile', () => {
+  console.log('Submit form');  
+  
+});
 editProfilePopup.setEventListeners();
 
 editProfileButton.addEventListener('click', () => {
   editProfilePopup.open();
  });
-
-const popupImage = new PopupWithImage('.popup-img');
-const imageData = {
-  src: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  name: 'Архыз'
-}
-popupImage.setEventListeners();
-popupImage.open(imageData);
 
 // editProfileButton.addEventListener('click', () => {
 //   openPopup(popupEditProfile,inputValuesProfile);

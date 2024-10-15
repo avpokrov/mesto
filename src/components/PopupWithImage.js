@@ -6,7 +6,8 @@ export class PopupWithImage extends Popup {
         this._image = this._popup.querySelector('.popup-img__image'); 
         this._text = this._popup.querySelector('.popup-img__text');
     }
-    open(imageData){        
+    open(imageData){     
+        console.log(this._image);           
         this._image.src = imageData.src;
         this._image.alt = imageData.name;
         this._text.textContent = imageData.name;
