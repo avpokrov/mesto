@@ -27,10 +27,13 @@ const validateData = {
 
 const popupImage = new PopupWithImage('.popup-img');
 popupImage.setEventListeners();
+const openPopupImage = (imageData) => {
+  popupImage.open(imageData);
+}
 
 const cardsList = new Section ({items: initialCards,
   renderer: (item)=>{ 
-    const card = new Card(item, '#card', popupImage.open);
+    const card = new Card(item, '#card', openPopupImage);
     return card.generateCard();  
   }
 }, '.cards');
