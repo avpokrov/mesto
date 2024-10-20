@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
 </head>
+
 <body class="page">
   <main class="main center">
     <header class="header ident-top40px">
@@ -16,7 +18,7 @@
         <div class="profile__info">
           <div class="profile__name-box">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="button button_editProfile active-element"%>></button>
+            <button class="button button_editProfile active-element" %>></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
@@ -29,32 +31,36 @@
       <p class="footer__text">&#169; 2024 Mesto Russia</p>
     </footer>
   </main>
-    <section class="popup popup-editProfile">
-      <div class="popup__container">
-        <button class="button button_close active-element"></button>
-        <h2 class="popup__header">Редактировать профиль</h2>
-        <form name="editProfile" class="popup__form" novalidate>
-          <input id="nameProfile" class="popup__input popup__field-text popup-name" minlength="2" maxlength="40" required></input>
-          <span class="nameProfile-error popup__field-text-error"></span>
-          <input id="descriptionProfile" class="popup__input popup__field-text popup-description" minlength="2" maxlength="200" required></input>
-          <span class="descriptionProfile-error popup__field-text-error"></span>
-          <button class="popup__button active-element">Сохранить</button>
-        </form>
-      </div>
-    </section>
-    <section class="popup popup-createCard">
-      <div class="popup__container">
-        <button class="button button_close active-element"></button>
-        <h2 class="popup__header">Новое место</h2>
-        <form name="addCard" class="popup__form" novalidate>
-          <input id="addCard" class="popup__input popup__field-text popup-name" placeholder="Название" minlength="2" maxlength="30" required></input>
-          <span class="addCard-error popup__field-text-error"></span>
-          <input id="urlCard" class="popup__input popup__field-text popup-description" placeholder="Введите url" type="url"></input>
-          <span class="urlCard-error popup__field-text-error"></span>
-          <button class="popup__button active-element">Создать</button>
-        </form>
-      </div>
-    </section>
+  <section class="popup popup-editProfile">
+    <div class="popup__container">
+      <button class="button button_close active-element"></button>
+      <h2 class="popup__header">Редактировать профиль</h2>
+      <form name="editProfile" class="popup__form" novalidate>
+        <input id="nameProfile" name="name" class="popup__input popup__field-text popup-name" minlength="2" maxlength="40"
+          required></input>
+        <span class="nameProfile-error popup__field-text-error"></span>
+        <input id="descriptionProfile" name="description" class="popup__input popup__field-text popup-description" minlength="2"
+          maxlength="200" required></input>
+        <span class="descriptionProfile-error popup__field-text-error"></span>
+        <button class="popup__button active-element">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup-createCard">
+    <div class="popup__container">
+      <button class="button button_close active-element"></button>
+      <h2 class="popup__header">Новое место</h2>
+      <form name="addCard" class="popup__form" novalidate>
+        <input id="addCard" name="name" class="popup__input popup__field-text popup-name" placeholder="Название"
+          minlength="2" maxlength="30" required></input>
+        <span class="addCard-error popup__field-text-error"></span>
+        <input id="urlCard" name="link" class="popup__input popup__field-text popup-description"
+          placeholder="Введите url" type="url"></input>
+        <span class="urlCard-error popup__field-text-error"></span>
+        <button class="popup__button active-element">Создать</button>
+      </form>
+    </div>
+  </section>
   <section class="popup popup-img">
     <div class="popup-img__container">
       <button class="button button_close active-element"></button>
@@ -74,4 +80,5 @@
   </template>
   <script src="/scripts/validate.js"></script>
 </body>
+
 </html>
