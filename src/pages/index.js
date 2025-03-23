@@ -18,6 +18,16 @@ import {
   addCardButton
 } from '../utils/constants.js';
 
+fetch('http://10.202.0.5:3005/users/me', {    
+  headers: {
+    authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2UwNTI4ZGRjN2VjMWYyNjRhNThmNDIiLCJpYXQiOjE3NDI3NTQ2ODIsImV4cCI6MTc3NDI5MDY4Mn0.fAro91RhT-J4cAxexlLZDd0M7xSdi3VnmfBrniQQhnA'
+  },
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  }); 
+
 
 const userInfo = new UserInfo({
   name: '.profile__name',
