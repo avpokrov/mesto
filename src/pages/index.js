@@ -5,6 +5,7 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { Card } from '../components/Card.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { ValidateForms } from '../components/ValidateForms.js';
+import { Api } from '../components/Api.js';
 
 import {
   initialCards,
@@ -15,24 +16,17 @@ import {
   popupImageElement,
   validateData,
   editProfileButton,
-  addCardButton
+  addCardButton,
+  apiParams
 } from '../utils/constants.js';
 
-fetch('http://10.202.0.5:3005/users/me', {    
-  headers: {
-    authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2UwNTI4ZGRjN2VjMWYyNjRhNThmNDIiLCJpYXQiOjE3NDI3NTQ2ODIsImV4cCI6MTc3NDI5MDY4Mn0.fAro91RhT-J4cAxexlLZDd0M7xSdi3VnmfBrniQQhnA'
-  },
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  }); 
-
-
-const userInfo = new UserInfo({
-  name: '.profile__name',
-  description: '.profile__description'
-})
+const apiMetod = new Api(apiParams);
+apiMetod.getMyInfo()
+  .then((userData) => {
+    console.log(userData)
+    
+    const userInfo = new UserInfo(userData);
+  })
 
 const popupImage = new PopupWithImage(popupImageElement);
 popupImage.setEventListeners();

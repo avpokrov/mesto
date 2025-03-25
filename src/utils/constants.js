@@ -39,4 +39,11 @@ export const validateData = {
 }
 export const editProfileButton = document.querySelector('.button_editProfile');
 export const addCardButton = document.querySelector('.button_addCard');
+export const apiParams = {
+  headers: {
+    authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2UwNTI4ZGRjN2VjMWYyNjRhNThmNDIiLCJpYXQiOjE3NDI3NTQ2ODIsImV4cCI6MTc3NDI5MDY4Mn0.fAro91RhT-J4cAxexlLZDd0M7xSdi3VnmfBrniQQhnA',
+    'Content-Type': 'application/json'
+  },
+  baseURL: 'http://10.202.0.5:3005'
+}
 
