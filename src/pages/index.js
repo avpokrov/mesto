@@ -24,8 +24,11 @@ const apiMetod = new Api(apiParams);
 apiMetod.getMyInfo()
   .then((userData) => {
     console.log(userData)
-    
-    const userInfo = new UserInfo(userData);
+    const userInfo = new UserInfo({
+      name: '.profile__name',
+      description: '.profile__description'
+    });
+    userInfo.setUserInfo(userData)
   })
 
 const popupImage = new PopupWithImage(popupImageElement);
