@@ -20,16 +20,20 @@ import {
   apiParams
 } from '../utils/constants.js';
 
+let userInfo;
+const userProfile = new UserInfo({
+  name: '.profile__name',
+  description: '.profile__description',
+  avatar: '.profile__image'
+});
+
 const apiMetod = new Api(apiParams);
 apiMetod.getMyInfo()
   .then((userData) => {
-    console.log(userData)
-    const userInfo = new UserInfo({
-      name: '.profile__name',
-      description: '.profile__description'
-    });
-    userInfo.setUserInfo(userData)
+    userProfile.setUserInfo(userData)
+    userInfo = userData;
   })
+
 
 const popupImage = new PopupWithImage(popupImageElement);
 popupImage.setEventListeners();

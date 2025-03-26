@@ -17,4 +17,22 @@ export class Api {
                 console.log(err);
             })
     }
+    addCard(dataCard) {
+        return fetch(`${this.params.baseURL}/cards`, {
+            headers: this.params.headers,
+            method: 'POST',
+            body: JSON.stringify({
+                name: dataCard.name,
+                link: dataCard.link
+            })
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                console.log(res);
+                return Promise.reject(`Ошибка:`)
+
+            })
+    }
 }
