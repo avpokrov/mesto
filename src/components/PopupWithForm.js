@@ -16,9 +16,9 @@ export class PopupWithForm extends Popup {
 
     }
 
-    setInputsForm(dataInput){
-        this._inputs[0].value = dataInput.name;
-        this._inputs[1].value = dataInput.description;
+    setInputsForm(dataInputs){        
+        this._inputs[0].value = dataInputs.name;
+        this._inputs[1].value = dataInputs.about;
     }
 
     setEventListeners() {

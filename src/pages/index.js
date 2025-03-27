@@ -46,15 +46,23 @@ const renderCard = (item) => {
   return card.generateCard();
 }
 
-const section = new Section({
-  items: initialCards,
-  renderer: renderCard
-}, '.cards');
-section.renderItems();
-
+apiMetod.getCards()
+  .then((cards) => {
+    const section = new Section({
+      items: cards,
+      renderer: renderCard
+    }, '.cards');
+    section.renderItems();
+  })
+  .catch ((err) => console.log(err));
 
 const editProfilePopup = new PopupWithForm(popupEditElement, (dataUser) => {
-  userInfo.setUserInfo(dataUser);
+  apiMetod.editProfile(dataUser)
+    .then((dataUser) => {
+      userProfile.setUserInfo(dataUser);
+      userInfo = dataUser
+    })
+    .catch(err => console.log(err))
 });
 editProfilePopup.setEventListeners();
 
@@ -76,7 +84,7 @@ const validationFormsAddCard = new ValidateForms(validateData, popupAddCardForm)
 validationFormsAddCard.enableValidation();
 
 editProfileButton.addEventListener('click', () => {
-  editProfilePopup.setInputsForm(userInfo.getUserInfo());
+  editProfilePopup.setInputsForm(userInfo);
   validationFormsEditProfile.resetValidation();
   editProfilePopup.open();
 });

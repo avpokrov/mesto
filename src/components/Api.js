@@ -1,21 +1,22 @@
+import { postcss } from "autoprefixer";
+
 export class Api {
     constructor(params) {
         this.params = params;
     }
+    _checkData(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
+    }
+
     getMyInfo() {
         return fetch(`${this.params.baseURL}/users/me`, {
             headers: this.params.headers,
             method: 'GET'
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        .then(res => this._checkData(res))
     }
     addCard(dataCard) {
         return fetch(`${this.params.baseURL}/cards`, {
@@ -26,13 +27,24 @@ export class Api {
                 link: dataCard.link
             })
         })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-                console.log(res);
-                return Promise.reject(`Ошибка:`)
-
-            })
+        .then(res => this._checkData(res))
+    }
+    getCards() {
+        return fetch(`${this.params.baseURL}/cards`, {
+            method: "GET",
+            headers: this.params.headers
+        })
+        .then(res => this._checkData(res))
+    }
+    editProfile(profileData){
+        return fetch(`${this.params.baseURL}/users/me`,{
+            method: "PATCH",
+            headers: this.params.headers,
+            body: JSON.stringify({
+                name: profileData.name,
+                about: profileData.about
+            })            
+        })
+        .then((res) => this._checkData(res))
     }
 }

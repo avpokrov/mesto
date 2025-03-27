@@ -5,16 +5,9 @@ export class UserInfo {
         this._avatar = document.querySelector(dataUserSelector.avatar);
     }
 
-    getUserInfo() {
-        const dataUser = {
-            name: this._name.textContent,
-            description: this._description.textContent
-        }
-        return dataUser;
-    }
     setUserInfo(dataUser) {
         this._name.textContent = dataUser.name;
-        this._description.textContent = dataUser.description;
+        this._description.textContent = dataUser.about;
         this._avatar.src = dataUser.avatar;
     }
 }
