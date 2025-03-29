@@ -47,4 +47,15 @@ export class Api {
         })
         .then((res) => this._checkData(res))
     }
+    addCard(card){
+        return fetch(`${this.params.baseURL}/cards`, {
+            method: "POST",
+            headers: this.params.headers,
+            body: JSON.stringify({
+                name: card.name,
+                link: card.link
+            })            
+        })
+        .then((res) => this._checkData(res))
+    }
 }

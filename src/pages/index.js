@@ -45,14 +45,11 @@ const renderCard = (item) => {
   const card = new Card(item, '#card', openPopupImage);
   return card.generateCard();
 }
+const sectionCard = new Section(renderCard,'.cards');
 
 apiMetod.getCards()
   .then((cards) => {
-    const section = new Section({
-      items: cards,
-      renderer: renderCard
-    }, '.cards');
-    section.renderItems();
+    sectionCard.renderItems(cards);
   })
   .catch ((err) => console.log(err));
 
@@ -67,11 +64,16 @@ const editProfilePopup = new PopupWithForm(popupEditElement, (dataUser) => {
 editProfilePopup.setEventListeners();
 
 const popupAddCard = new PopupWithForm(popupAddCardElement, (dataCard) => {
-  const card = renderCard({
-    name: dataCard.name,
-    link: dataCard.link
-  });
-  section.addItem(card);
+  apiMetod.addCard(dataCard)
+    .then((datacard) => {
+      console.log(datacard);
+      const card = renderCard({
+        name: datacard.name,
+        link: datacard.link
+      });
+      sectionCard.addItem(card);
+    })
+    .catch(err => console.log(err));
 });
 
 popupAddCard.setEventListeners();

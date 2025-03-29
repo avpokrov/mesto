@@ -68,13 +68,28 @@
       <h3 class="popup-img__text"></h3>
     </div>
   </section>
+    
+  <section class="popup popup-accept">
+    <div class="popup__container">
+      <button class="button button_close active-element"></button>
+      <h2 class="popup__header">Вы уверены?</h2>
+      <div class="popup-accept__block">
+        <button class="popup__button active-element popup__button_accept on">Да</button>
+        <button class="popup__button active-element popup__button_accept off">Нет</button>
+      </div>
+    </div>
+  </section>
+
   <template id="card">
     <li class="card">
       <div class="trash active-element"></div>
       <img class="card__img" src="" alt="">
       <div class="card__info">
         <h2 class="card__name"></h2>
-        <div class="like active-element"></div>
+        <div class="like__block">
+          <div class="like active-element"></div>
+          <div class="like__sum">0</div>
+        </div>
       </div>
     </li>
   </template>
