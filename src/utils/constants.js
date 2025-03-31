@@ -30,6 +30,7 @@ export const popupEditForm = popupEditElement.querySelector('.popup__form');
 export const popupAddCardElement = document.querySelector('.popup-createCard');
 export const popupAddCardForm = popupAddCardElement.querySelector('.popup__form');
 export const popupImageElement = document.querySelector('.popup-img');
+export const popupAcceptElement = document.querySelector('.popup-accept');
 export const validateData = {
   inputSelector: '.popup__field-text',
   submitButtonSelector: '.popup__button',

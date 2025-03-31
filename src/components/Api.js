@@ -58,4 +58,12 @@ export class Api {
         })
         .then((res) => this._checkData(res))
     }
+
+    delCard(cardId){
+        return fetch(`${this.params.baseURL}/cards/${cardId}`, {
+            method: "DELETE",
+            headers: this.params.headers,            
+        })
+        .then((res) => this._checkData(res))
+    }
 }

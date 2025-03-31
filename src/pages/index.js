@@ -2,6 +2,7 @@ import '../index.css';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupAccept } from '../components/PopupAccept.js';
 import { Card } from '../components/Card.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { ValidateForms } from '../components/ValidateForms.js';
@@ -13,6 +14,7 @@ import {
   popupEditForm,
   popupAddCardElement,
   popupAddCardForm,
+  popupAcceptElement,
   popupImageElement,
   validateData,
   editProfileButton,
@@ -26,6 +28,12 @@ const userProfile = new UserInfo({
   description: '.profile__description',
   avatar: '.profile__image'
 });
+
+const popupDelCard = new PopupAccept(popupAcceptElement, () => {
+  console.log('Accept');
+})
+popupDelCard.setEventListeners();
+popupDelCard.open();
 
 const apiMetod = new Api(apiParams);
 apiMetod.getMyInfo()
@@ -41,8 +49,17 @@ const openPopupImage = (imageData) => {
   popupImage.open(imageData);
 }
 
+const deleteCard = (card) => {
+  apiMetod.delCard(card.getId())
+    .then((res) => {
+      card.remove();
+    })
+    .catch((err) => console.log('Ошибка удаления', err))
+
+}
+
 const renderCard = (item) => {
-  const card = new Card(item, '#card', openPopupImage);
+  const card = new Card(item, '#card', openPopupImage, deleteCard);
   return card.generateCard();
 }
 const sectionCard = new Section(renderCard,'.cards');
@@ -66,11 +83,7 @@ editProfilePopup.setEventListeners();
 const popupAddCard = new PopupWithForm(popupAddCardElement, (dataCard) => {
   apiMetod.addCard(dataCard)
     .then((datacard) => {
-      console.log(datacard);
-      const card = renderCard({
-        name: datacard.name,
-        link: datacard.link
-      });
+      const card = renderCard(datacard);
       sectionCard.addItem(card);
     })
     .catch(err => console.log(err));
