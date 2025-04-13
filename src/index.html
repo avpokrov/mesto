@@ -14,7 +14,9 @@
     </header>
     <section class="profile ident-top40px">
       <div class="profile_box">
-        <img class="profile__image" src="" alt="avatar">
+        <div class="profile__wrapper">
+          <img class="profile__image" src="" alt="avatar">
+        </div>
         <div class="profile__info">
           <div class="profile__name-box">
             <h1 class="profile__name"></h1>
@@ -36,11 +38,11 @@
       <button class="button button_close active-element"></button>
       <h2 class="popup__header">Редактировать профиль</h2>
       <form name="editProfile" class="popup__form" novalidate>
-        <input id="nameProfile" name="name" class="popup__input popup__field-text popup-name" minlength="2" maxlength="40"
-          required></input>
+        <input id="nameProfile" name="name" class="popup__input popup__field-text popup-name" minlength="2"
+          maxlength="40" required></input>
         <span class="nameProfile-error popup__field-text-error"></span>
-        <input id="descriptionProfile" name="about" class="popup__input popup__field-text popup-description" minlength="2"
-          maxlength="200" required></input>
+        <input id="descriptionProfile" name="about" class="popup__input popup__field-text popup-description"
+          minlength="2" maxlength="200" required></input>
         <span class="descriptionProfile-error popup__field-text-error"></span>
         <button class="popup__button active-element">Сохранить</button>
       </form>
@@ -68,7 +70,7 @@
       <h3 class="popup-img__text"></h3>
     </div>
   </section>
-    
+
   <section class="popup popup-accept">
     <div class="popup__container">
       <button class="button button_close active-element"></button>
@@ -77,6 +79,18 @@
         <button class="popup__button active-element popup__button_accept popup__button_accept_accept">Да</button>
         <button class="popup__button active-element popup__button_accept popup__button_accept_cancel">Нет</button>
       </div>
+    </div>
+  </section>
+  <section class="popup popup-updateAvatar">
+    <div class="popup__container">
+      <button class="button button_close active-element"></button>
+      <h2 class="popup__header">Обновить аватар</h2>
+      <form name="updateAvatar" class="popup__form" novalidate>
+        <input id="urlAvatar" name="link" class="popup__input popup__field-text popup-link" placeholder="Введите url"
+        pattern="https?://.+" type="url" required></inputc>
+        <span class="urlAvatar-error popup__field-text-error"></span>
+        <button class="popup__button active-element">Сохранить</button>
+      </form>
     </div>
   </section>
 
@@ -88,7 +102,7 @@
         <h2 class="card__name"></h2>
         <div class="like__block">
           <div class="like active-element"></div>
-          <div class="like__sum">0</div>
+          <div class="like__sum"></div>
         </div>
       </div>
     </li>

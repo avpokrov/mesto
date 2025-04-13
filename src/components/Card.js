@@ -1,9 +1,13 @@
 export class Card {
-  constructor(dataCard, template, openPopupImage, deleteCard) {
+  constructor(dataCard, template, openPopupImage, popupAccept, deleteCard, userID, addLike, delLike) {
     this._dataCard = dataCard;
     this._template = template;
     this._openPopupImage = openPopupImage;
     this._deleteCard = deleteCard;
+    this._popupAccept = popupAccept;
+    this._userID = userID;
+    this._addLike = addLike;
+    this._delLike = delLike;
   }
   _getTemplate() {
     const cardElement = document.querySelector(this._template).content
@@ -16,9 +20,19 @@ export class Card {
     this._setEventListeners();
     const cardImg = this._element.querySelector('.card__img');
     const cardName = this._element.querySelector('.card__name');
+    const trash = this._element.querySelector('.trash');
+    const likeCount = this._element.querySelector('.like__sum');
+    const cardLike = this._element.querySelector('.like');
+    likeCount.textContent = this._dataCard.likes.length;
     cardImg.src = this._dataCard.link;
     cardImg.alt = this._dataCard.name;
     cardName.textContent = this._dataCard.name;
+    if (this._getUserID() != this._dataCard.owner){
+      trash.remove();
+    }
+    if (this._checkLikeCadr()){
+      cardLike.classList.add('like_active');
+    }
     return this._element;
   }
 
@@ -27,15 +41,21 @@ export class Card {
       this._handleClickLike();
     })
     this._element.querySelector('.trash').addEventListener('click', () => {
-      this._deleteCard(this);     
+      this._popupAccept.open();
+      this._popupAccept.addEvent(() => this._deleteCard(this));  
     })
     this._element.querySelector('.card__img').addEventListener('click', () => {
-      this._openPopupImage({ src: this._link, name: this._name });
+      this._openPopupImage({ src: this._dataCard.link, name: this._dataCard.name });
     })
   }
 
   _handleClickLike() {
-    this._element.querySelector('.like').classList.toggle('like_active');
+    if (this._checkLikeCadr()){
+      this._delLike(this);
+    } else {
+      this._addLike(this);
+      this._element.querySelector('.like').classList.add('like_active');
+    }
   }
 
   remove() {
@@ -45,5 +65,22 @@ export class Card {
   getId() {
      return this._dataCard._id;
   }
+
+ _getUserID(){
+    return this._userID._id;
+  }
+ _checkLikeCadr(){
+    return this._dataCard.likes.includes(this._getUserID());
+ }
+
+ displayLike(card){
+    this._dataCard = card;
+    if(this._checkLikeCadr()){
+      this._element.querySelector('.like').classList.add('like_active');
+    } else {
+      this._element.querySelector('.like').classList.remove('like_active');
+    }
+    this._element.querySelector('.like__sum').textContent = card.likes.length; 
+ } 
 
 }

@@ -66,4 +66,28 @@ export class Api {
         })
         .then((res) => this._checkData(res))
     }
+    addLikeCard(cardId){
+        return fetch(`${this.params.baseURL}/cards/${cardId}/likes`, {
+            method: "PUT",
+            headers: this.params.headers,            
+        })
+        .then((res) => this._checkData(res))
+    }
+    delLikeCard(cardId){
+        return fetch(`${this.params.baseURL}/cards/${cardId}/likes`, {
+            method: "DELETE",
+            headers: this.params.headers,            
+        })
+        .then((res) => this._checkData(res))
+    }
+    updateAvatar(urlAvatar) {
+        return fetch(`${this.params.baseURL}/users/me/avatar`, {
+            method: "PATCH",
+            headers: this.params.headers,
+            body: JSON.stringify({
+                avatar: urlAvatar.link
+            }) 
+        })
+        .then((res) =>this._checkData(res))
+    } 
 }

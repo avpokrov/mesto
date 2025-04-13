@@ -16,9 +16,12 @@ import {
   popupAddCardForm,
   popupAcceptElement,
   popupImageElement,
+  popupUpdateAvatarElement,
   validateData,
   editProfileButton,
   addCardButton,
+  updateButtonAvatar,
+  popupUpdateAvatarForm,
   apiParams
 } from '../utils/constants.js';
 
@@ -29,11 +32,9 @@ const userProfile = new UserInfo({
   avatar: '.profile__image'
 });
 
-const popupDelCard = new PopupAccept(popupAcceptElement, () => {
-  console.log('Accept');
-})
+const popupDelCard = new PopupAccept(popupAcceptElement)
 popupDelCard.setEventListeners();
-popupDelCard.open();
+
 
 const apiMetod = new Api(apiParams);
 apiMetod.getMyInfo()
@@ -41,6 +42,34 @@ apiMetod.getMyInfo()
     userProfile.setUserInfo(userData)
     userInfo = userData;
   })
+  .then(() => {
+    apiMetod.getCards()
+      .then((cards) => {
+        sectionCard.renderItems(cards);
+      })
+  })
+  .catch((err) => console.log(err));
+
+  const popupUpdateAvatar = new PopupWithForm(popupUpdateAvatarElement, (urlAvatar) => {
+    popupUpdateAvatar.activeLoad();
+    apiMetod.updateAvatar(urlAvatar)    
+      .then((user) => {
+        userInfo = user;
+        userProfile.setUserInfo(userInfo);
+      })
+      .catch((err) => console.log('Ошибка обновления аватара: ', err))
+      .finally(() => popupUpdateAvatar.finishLoad())
+  });
+  popupUpdateAvatar.setEventListeners();
+  
+//   initialCards.forEach((dataCard) => {
+//     apiMetod.addCard(dataCard)
+//     .then((datacard) => {
+//       const card = renderCard(datacard);
+//       sectionCard.addItem(card);
+//     })
+//     .catch(err => console.log(err));
+// });
 
 
 const popupImage = new PopupWithImage(popupImageElement);
@@ -58,35 +87,48 @@ const deleteCard = (card) => {
 
 }
 
+const addLike = (card) => {
+  apiMetod.addLikeCard(card.getId())
+    .then((newCard) => {
+      card.displayLike(newCard);
+    })
+    .catch((err) => console.log('Ошибка постановки лайка', err))
+}
+const delLike = (card) => {
+  apiMetod.delLikeCard(card.getId())
+    .then((newCard) => {
+      card.displayLike(newCard);
+    })
+    .catch((err) => console.log('Ошибка снятия лайка', err))
+}
+
 const renderCard = (item) => {
-  const card = new Card(item, '#card', openPopupImage, deleteCard);
+  const card = new Card(item, '#card', openPopupImage, popupDelCard, deleteCard, userInfo, addLike, delLike);
   return card.generateCard();
 }
-const sectionCard = new Section(renderCard,'.cards');
-
-apiMetod.getCards()
-  .then((cards) => {
-    sectionCard.renderItems(cards);
-  })
-  .catch ((err) => console.log(err));
+const sectionCard = new Section(renderCard, '.cards');
 
 const editProfilePopup = new PopupWithForm(popupEditElement, (dataUser) => {
+  editProfilePopup.activeLoad();
   apiMetod.editProfile(dataUser)
     .then((dataUser) => {
       userProfile.setUserInfo(dataUser);
       userInfo = dataUser
     })
     .catch(err => console.log(err))
+    .finally(()=> editProfilePopup.finishLoad())
 });
 editProfilePopup.setEventListeners();
 
 const popupAddCard = new PopupWithForm(popupAddCardElement, (dataCard) => {
+  popupAddCard.activeLoad();
   apiMetod.addCard(dataCard)
     .then((datacard) => {
       const card = renderCard(datacard);
       sectionCard.addItem(card);
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .finally(() => popupAddCard.finishLoad())
 });
 
 popupAddCard.setEventListeners();
@@ -98,6 +140,9 @@ validationFormsEditProfile.enableValidation();
 const validationFormsAddCard = new ValidateForms(validateData, popupAddCardForm);
 validationFormsAddCard.enableValidation();
 
+const validationFormsUpdateAvatar = new ValidateForms(validateData, popupUpdateAvatarForm);
+validationFormsUpdateAvatar.enableValidation();
+
 editProfileButton.addEventListener('click', () => {
   editProfilePopup.setInputsForm(userInfo);
   validationFormsEditProfile.resetValidation();
@@ -108,3 +153,8 @@ addCardButton.addEventListener('click', () => {
   validationFormsAddCard.resetValidation();
   popupAddCard.open();
 });
+
+updateButtonAvatar.addEventListener('click', () => {
+  validationFormsUpdateAvatar.resetValidation();
+  popupUpdateAvatar.open();
+})

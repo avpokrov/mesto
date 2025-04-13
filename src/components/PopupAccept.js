@@ -1,12 +1,15 @@
 import { Popup } from "./Popup";
 
 export class PopupAccept extends Popup {
-    constructor(popup, submit) {
+    constructor(popup) {
         super(popup);
-        this._submit = submit;
         this._buttonAccept = this._popup.querySelector('.popup__button_accept_accept');
         this._buttonCancel = this._popup.querySelector('.popup__button_accept_cancel');
         
+    }
+
+    addEvent(submit) {
+        this._submit = submit;
     }
 
     setEventListeners() {
