@@ -1,13 +1,12 @@
 export class Card {
-  constructor(dataCard, template, openPopupImage, popupAccept, deleteCard, userID, addLike, delLike) {
+  constructor(dataCard, template, openPopupImage, popupAccept, deleteCard, userID, changeLike) {
     this._dataCard = dataCard;
     this._template = template;
     this._openPopupImage = openPopupImage;
     this._deleteCard = deleteCard;
     this._popupAccept = popupAccept;
     this._userID = userID;
-    this._addLike = addLike;
-    this._delLike = delLike;
+    this._changeLike = changeLike;
   }
   _getTemplate() {
     const cardElement = document.querySelector(this._template).content
@@ -51,9 +50,9 @@ export class Card {
 
   _handleClickLike() {
     if (this._checkLikeCadr()){
-      this._delLike(this);
+      this._changeLike(this, 'DELETE');
     } else {
-      this._addLike(this);
+      this._changeLike(this, 'PUT');
       this._element.querySelector('.like').classList.add('like_active');
     }
   }

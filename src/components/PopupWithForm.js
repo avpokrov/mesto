@@ -18,7 +18,7 @@ export class PopupWithForm extends Popup {
 
     }
 
-    setInputsForm(dataInputs){        
+    setInputsForm(dataInputs) {
         this._inputs[0].value = dataInputs.name;
         this._inputs[1].value = dataInputs.about;
     }
@@ -36,10 +36,12 @@ export class PopupWithForm extends Popup {
         this._form.reset();
         super.close();
     }
-    activeLoad() {
-        this._button.textContent = 'Сохранение...';
+    statusLoad(status) {
+        if (!status) {
+            this._button.textContent = 'Сохранение...';
+        } else {
+            this._button.textContent = this._buttonText;
+        }
     }
-    finishLoad() {
-        this._button.textContent = this._buttonText;
-    }
+    
 }

@@ -37,31 +37,19 @@ popupDelCard.setEventListeners();
 
 
 const apiMetod = new Api(apiParams);
-apiMetod.getMyInfo()
-  .then((userData) => {
-    userProfile.setUserInfo(userData)
-    userInfo = userData;
-  })
-  .then(() => {
-    apiMetod.getCards()
-      .then((cards) => {
-        sectionCard.renderItems(cards);
-      })
-  })
-  .catch((err) => console.log(err));
 
-  const popupUpdateAvatar = new PopupWithForm(popupUpdateAvatarElement, (urlAvatar) => {
-    popupUpdateAvatar.activeLoad();
-    apiMetod.updateAvatar(urlAvatar)    
-      .then((user) => {
-        userInfo = user;
-        userProfile.setUserInfo(userInfo);
-      })
-      .catch((err) => console.log('Ошибка обновления аватара: ', err))
-      .finally(() => popupUpdateAvatar.finishLoad())
-  });
-  popupUpdateAvatar.setEventListeners();
-  
+const popupUpdateAvatar = new PopupWithForm(popupUpdateAvatarElement, (urlAvatar) => {
+  popupUpdateAvatar.statusLoad(false);
+  apiMetod.updateAvatar(urlAvatar)
+    .then((user) => {
+      userInfo = user;
+      userProfile.setUserInfo(userInfo);
+    })
+    .catch((err) => console.log('Ошибка обновления аватара: ', err))
+    .finally(() => popupUpdateAvatar.statusLoad(true))
+});
+popupUpdateAvatar.setEventListeners();
+
 //   initialCards.forEach((dataCard) => {
 //     apiMetod.addCard(dataCard)
 //     .then((datacard) => {
@@ -87,48 +75,40 @@ const deleteCard = (card) => {
 
 }
 
-const addLike = (card) => {
-  apiMetod.addLikeCard(card.getId())
+const changeLike = (card, method) => {
+  apiMetod.changeLikeCard(card.getId(), method)
     .then((newCard) => {
       card.displayLike(newCard);
     })
-    .catch((err) => console.log('Ошибка постановки лайка', err))
-}
-const delLike = (card) => {
-  apiMetod.delLikeCard(card.getId())
-    .then((newCard) => {
-      card.displayLike(newCard);
-    })
-    .catch((err) => console.log('Ошибка снятия лайка', err))
-}
-
+    .catch((err) => console.log('Ошибка постановки (снятия) лайка', err))
+  }
 const renderCard = (item) => {
-  const card = new Card(item, '#card', openPopupImage, popupDelCard, deleteCard, userInfo, addLike, delLike);
+  const card = new Card(item, '#card', openPopupImage, popupDelCard, deleteCard, userInfo, changeLike);
   return card.generateCard();
 }
 const sectionCard = new Section(renderCard, '.cards');
 
 const editProfilePopup = new PopupWithForm(popupEditElement, (dataUser) => {
-  editProfilePopup.activeLoad();
+  editProfilePopup.statusLoad(false);
   apiMetod.editProfile(dataUser)
     .then((dataUser) => {
       userProfile.setUserInfo(dataUser);
       userInfo = dataUser
     })
     .catch(err => console.log(err))
-    .finally(()=> editProfilePopup.finishLoad())
+    .finally(() => editProfilePopup.statusLoad(true))
 });
 editProfilePopup.setEventListeners();
 
 const popupAddCard = new PopupWithForm(popupAddCardElement, (dataCard) => {
-  popupAddCard.activeLoad();
+  popupAddCard.statusLoad(false);
   apiMetod.addCard(dataCard)
     .then((datacard) => {
       const card = renderCard(datacard);
       sectionCard.addItem(card);
     })
     .catch(err => console.log(err))
-    .finally(() => popupAddCard.finishLoad())
+    .finally(() => popupAddCard.statusLoad(true))
 });
 
 popupAddCard.setEventListeners();
@@ -158,3 +138,12 @@ updateButtonAvatar.addEventListener('click', () => {
   validationFormsUpdateAvatar.resetValidation();
   popupUpdateAvatar.open();
 })
+
+Promise.all([apiMetod.getMyInfo(), apiMetod.getCards()])
+  .then(([userData, cards]) => {
+    userProfile.setUserInfo(userData);
+    userInfo = userData;
+    sectionCard.renderItems(cards);
+  })
+  .catch((err) => console.log(err));
+
