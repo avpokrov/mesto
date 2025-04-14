@@ -26,7 +26,7 @@ export class Card {
     cardImg.src = this._dataCard.link;
     cardImg.alt = this._dataCard.name;
     cardName.textContent = this._dataCard.name;
-    if (this._getUserID() != this._dataCard.owner){
+    if (this._userID != this._dataCard.owner){
       trash.remove();
     }
     if (this._checkLikeCadr()){
@@ -65,11 +65,8 @@ export class Card {
      return this._dataCard._id;
   }
 
- _getUserID(){
-    return this._userID._id;
-  }
  _checkLikeCadr(){
-    return this._dataCard.likes.includes(this._getUserID());
+    return this._dataCard.likes.includes(this._userID);
  }
 
  displayLike(card){

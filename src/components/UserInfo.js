@@ -5,9 +5,27 @@ export class UserInfo {
         this._avatar = document.querySelector(dataUserSelector.avatar);
     }
 
-    setUserInfo(dataUser) {
-        this._name.textContent = dataUser.name;
-        this._description.textContent = dataUser.about;
-        this._avatar.src = dataUser.avatar;
+    setUserInfo({name, about, avatar, _id}) {
+        if(name){
+            this._name.textContent = name;
+        }
+        if(about) {
+            this._description.textContent = about;
+        }
+        if(avatar){
+            this._avatar.src = avatar;
+        }
+        this._id = _id;
+    }
+
+    getUserInfo() {
+        return {
+            name: this._name.textContent,
+            about: this._description.textContent
+        }
+    }
+
+    getUserID() {
+        return this._id;
     }
 }

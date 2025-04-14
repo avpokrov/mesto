@@ -25,7 +25,6 @@ import {
   apiParams
 } from '../utils/constants.js';
 
-let userInfo;
 const userProfile = new UserInfo({
   name: '.profile__name',
   description: '.profile__description',
@@ -42,8 +41,7 @@ const popupUpdateAvatar = new PopupWithForm(popupUpdateAvatarElement, (urlAvatar
   popupUpdateAvatar.statusLoad(false);
   apiMetod.updateAvatar(urlAvatar)
     .then((user) => {
-      userInfo = user;
-      userProfile.setUserInfo(userInfo);
+      userProfile.setUserInfo(user);
     })
     .catch((err) => console.log('Ошибка обновления аватара: ', err))
     .finally(() => popupUpdateAvatar.statusLoad(true))
@@ -83,7 +81,7 @@ const changeLike = (card, method) => {
     .catch((err) => console.log('Ошибка постановки (снятия) лайка', err))
   }
 const renderCard = (item) => {
-  const card = new Card(item, '#card', openPopupImage, popupDelCard, deleteCard, userInfo, changeLike);
+  const card = new Card(item, '#card', openPopupImage, popupDelCard, deleteCard, userProfile.getUserID(), changeLike);
   return card.generateCard();
 }
 const sectionCard = new Section(renderCard, '.cards');
@@ -93,7 +91,6 @@ const editProfilePopup = new PopupWithForm(popupEditElement, (dataUser) => {
   apiMetod.editProfile(dataUser)
     .then((dataUser) => {
       userProfile.setUserInfo(dataUser);
-      userInfo = dataUser
     })
     .catch(err => console.log(err))
     .finally(() => editProfilePopup.statusLoad(true))
@@ -124,7 +121,7 @@ const validationFormsUpdateAvatar = new ValidateForms(validateData, popupUpdateA
 validationFormsUpdateAvatar.enableValidation();
 
 editProfileButton.addEventListener('click', () => {
-  editProfilePopup.setInputsForm(userInfo);
+  editProfilePopup.setInputsForm(userProfile.getUserInfo());
   validationFormsEditProfile.resetValidation();
   editProfilePopup.open();
 });
@@ -142,7 +139,6 @@ updateButtonAvatar.addEventListener('click', () => {
 Promise.all([apiMetod.getMyInfo(), apiMetod.getCards()])
   .then(([userData, cards]) => {
     userProfile.setUserInfo(userData);
-    userInfo = userData;
     sectionCard.renderItems(cards);
   })
   .catch((err) => console.log(err));
