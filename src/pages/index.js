@@ -60,28 +60,31 @@ popupUpdateAvatar.setEventListeners();
 
 const popupImage = new PopupWithImage(popupImageElement);
 popupImage.setEventListeners();
-const openPopupImage = (imageData) => {
-  popupImage.open(imageData);
-}
 
-const deleteCard = (card) => {
-  apiMetod.delCard(card.getId())
-    .then((res) => {
-      card.remove();
-    })
-    .catch((err) => console.log('Ошибка удаления', err))
-
-}
-
-const changeLike = (card, method) => {
-  apiMetod.changeLikeCard(card.getId(), method)
-    .then((newCard) => {
-      card.displayLike(newCard);
-    })
-    .catch((err) => console.log('Ошибка постановки (снятия) лайка', err))
-  }
 const renderCard = (item) => {
-  const card = new Card(item, '#card', openPopupImage, popupDelCard, deleteCard, userProfile.getUserID(), changeLike);
+  const card = new Card({
+    dataCard: item,
+    selector: '#card',
+    user: userProfile.getUserID(),
+    cardClick: (imageData) => popupImage.open(imageData),
+    delCardClick: (card) => {
+      popupDelCard.addEvent(() => {
+        apiMetod.delCard(card.getId())
+          .then((res) => {
+            card.remove();
+          })
+          .catch((err) => console.log('Ошибка удаления', err))
+      })
+      popupDelCard.open();
+    },
+    likeClick: (card, method) => {
+      apiMetod.changeLikeCard(card.getId(), method)
+        .then((newCard) => {
+          card.displayLike(newCard);
+        })
+        .catch((err) => console.log('Ошибка постановки (снятия) лайка', err))
+    }
+  });
   return card.generateCard();
 }
 const sectionCard = new Section(renderCard, '.cards');

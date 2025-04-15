@@ -1,12 +1,11 @@
 export class Card {
-  constructor(dataCard, template, openPopupImage, popupAccept, deleteCard, userID, changeLike) {
-    this._dataCard = dataCard;
-    this._template = template;
-    this._openPopupImage = openPopupImage;
-    this._deleteCard = deleteCard;
-    this._popupAccept = popupAccept;
-    this._userID = userID;
-    this._changeLike = changeLike;
+  constructor(cardObject) {
+    this._dataCard = cardObject.dataCard;
+    this._template = cardObject.selector;
+    this._cardClick = cardObject.cardClick;
+    this._delCardClick = cardObject.delCardClick;
+    this._userID = cardObject.user;
+    this._likeClick = cardObject.likeClick;
   }
   _getTemplate() {
     const cardElement = document.querySelector(this._template).content
@@ -40,19 +39,18 @@ export class Card {
       this._handleClickLike();
     })
     this._element.querySelector('.trash').addEventListener('click', () => {
-      this._popupAccept.open();
-      this._popupAccept.addEvent(() => this._deleteCard(this));  
+      this._delCardClick(this);  
     })
     this._element.querySelector('.card__img').addEventListener('click', () => {
-      this._openPopupImage({ src: this._dataCard.link, name: this._dataCard.name });
+      this._cardClick({ src: this._dataCard.link, name: this._dataCard.name });
     })
   }
 
   _handleClickLike() {
     if (this._checkLikeCadr()){
-      this._changeLike(this, 'DELETE');
+      this._likeClick(this, 'DELETE');
     } else {
-      this._changeLike(this, 'PUT');
+      this._likeClick(this, 'PUT');
       this._element.querySelector('.like').classList.add('like_active');
     }
   }
